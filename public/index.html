@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация жителей</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Главный экран -->
+        <div id="mainScreen" class="screen active">
+            <div class="welcome-box">
+                <h1>Добро пожаловать</h1>
+                <p>в мир ролевой игры</p>
+                <button class="btn btn-primary" onclick="showRegistration()">Стать жителем</button>
+                <button class="btn btn-secondary" onclick="showAdminLogin()">Админ панель</button>
+            </div>
+        </div>
+
+        <!-- Форма регистрации -->
+        <div id="registrationScreen" class="screen">
+            <div class="form-box">
+                <h2>Регистрация жителя</h2>
+                <form id="registrationForm" onsubmit="handleRegistration(event)">
+                    <div class="form-group">
+                        <label for="firstName">Имя *</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Иван" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Фамилия *</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Петров" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="middleName">Отчество</label>
+                        <input type="text" id="middleName" name="middleName" placeholder="Сергеевич">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Возраст *</label>
+                        <input type="number" id="age" name="age" placeholder="25" min="13" max="150" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workplace">Место работы/учебы или статус *</label>
+                        <select id="workplace" name="workplace" required>
+                            <option value="">Выберите вариант</option>
+                            <option value="Работник">Работаю</option>
+                            <option value="Студент">Учусь в ВУЗе</option>
+                            <option value="Школьник">Учусь в школе</option>
+                            <option value="Безработный">Безработный</option>
+                            <option value="На пенсии">На пенсии</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        <button type="button" class="btn btn-secondary" onclick="showMain()">Назад</button>
+                    </div>
+                </form>
+                <div id="registrationMessage" class="message"></div>
+            </div>
+        </div>
+
+        <!-- Админ логин -->
+        <div id="adminLoginScreen" class="screen">
+            <div class="form-box">
+                <h2>Администратор</h2>
+                <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                        <label for="adminPassword">Пароль</label>
+                        <input type="password" id="adminPassword" name="adminPassword" placeholder="Введите пароль" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <button type="button" class="btn btn-secondary" onclick="showMain()">Назад</button>
+                    </div>
+                </form>
+                <div id="loginMessage" class="message"></div>
+            </div>
+        </div>
+
+        <!-- Админ панель -->
+        <div id="adminScreen" class="screen">
+            <div class="admin-box">
+                <h2>Админ-панель</h2>
+                <div class="admin-actions">
+                    <button class="btn btn-secondary" onclick="logoutAdmin()">Выход</button>
+                </div>
+                <div id="residentsList" class="residents-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Имя</th>
+                                <th>Фамилия</th>
+                                <th>Отчество</th>
+                                <th>Возраст</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="residentsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Редактирование жителя -->
+        <div id="editScreen" class="screen">
+            <div class="form-box">
+                <h2>Редактировать жителя</h2>
+                <form id="editForm" onsubmit="handleEdit(event)">
+                    <input type="hidden" id="editId">
+                    
+                    <div class="form-group">
+                        <label for="editFirstName">Имя *</label>
+                        <input type="text" id="editFirstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editLastName">Фамилия *</label>
+                        <input type="text" id="editLastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editMiddleName">Отчество</label>
+                        <input type="text" id="editMiddleName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editAge">Возраст *</label>
+                        <input type="number" id="editAge" min="13" max="150" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editWorkplace">Место работы/учебы *</label>
+                        <input type="text" id="editWorkplace" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" onclick="showAdmin()">Отмена</button>
+                    </div>
+                </form>
+                <div id="editMessage" class="message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
